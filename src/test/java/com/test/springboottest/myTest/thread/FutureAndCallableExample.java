@@ -14,17 +14,55 @@ import java.util.concurrent.FutureTask;
  */
 public class FutureAndCallableExample {
 
-    @Test
-    public void futureAndCallableExample() throws InterruptedException, ExecutionException {
-        Callable<String> callable = () -> {
-            System.out.println("Entered Callable");
-            Thread.sleep(2000);
-            return "Hello from Callable";
-        };
-        FutureTask<String> futureTask = new FutureTask<>(callable);
-        Thread thread = new Thread(futureTask);
-        thread.start();
-        System.out.println("Do something else while callable is getting executed");
-        System.out.println("Retrieved: " + futureTask.get());
+  public static class MyThread extends Thread {
+    @Override
+    public void run() {
+      Thread curThread = Thread.currentThread();
+      System.out.println("我是MyThread，继承Thread！");
+      System.out.println("threadExtendsThread-ThreadGroup:" + curThread.getThreadGroup());
+      System.out.println("threadExtendsThread-Priority:" + curThread.getPriority());
+      System.out.println("threadExtendsThread-id:" + curThread.getId());
+      System.out.println("threadExtendsThread-name:" + curThread.getName());
     }
+  }
+
+  @Test
+  public void threadExtendsThread() throws InterruptedException {
+    Thread curThread = Thread.currentThread();
+    System.out.println("我是threadExtendsThread方法内线程！");
+    System.out.println("threadExtendsThread-ThreadGroup:" + curThread.getThreadGroup());
+    System.out.println("threadExtendsThread-Priority:" + curThread.getPriority());
+    System.out.println("threadExtendsThread-id:" + curThread.getId());
+    System.out.println("threadExtendsThread-name:" + curThread.getName());
+
+    Thread myThread = new MyThread();
+    myThread.setPriority(10);
+    Thread.sleep(2000);
+    myThread.start();
+  }
+
+  @Test
+  public void threadImpRunable() {
+    Thread thread = new Thread(() -> {
+      System.out.println("threadImpRunable，实现Runable！");
+    });
+
+    thread.start();
+  }
+
+  @Test
+  public void futureAndCallableExample() throws InterruptedException, ExecutionException {
+    Callable<String> callable = () -> {
+      System.out.println("Entered Callable");
+      Thread.sleep(2000);
+      return "Hello from Callable";
+    };
+    FutureTask<String> futureTask = new FutureTask<>(callable);
+    Thread thread = new Thread(futureTask);
+    thread.start();
+    System.out.println("Do something else while callable is getting executed");
+    System.out.println("Retrieved: " + futureTask.get());
+  }
+
+
 }
