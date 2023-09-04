@@ -42,11 +42,32 @@ public class FutureAndCallableExample {
   }
 
   @Test
-  public void threadImpRunable() {
+  public void threadImpRunableLambda() {
     Thread thread = new Thread(() -> {
-      System.out.println("threadImpRunable，实现Runable！");
+      System.out.println("实现Runable，lambda表达式");
     });
+    thread.start();
+  }
 
+  @Test
+  public void threadExyendsThreadAnoymous() {
+    Thread thread = new Thread() {
+      @Override
+      public void run() {
+        System.out.println("匿名内部类实现继承Thread类");
+      }
+    };
+    thread.start();
+  }
+
+  @Test
+  public void threadImpRunableAnoymous() {
+    Thread thread = new Thread(new Runnable() {
+      @Override
+      public void run() {
+        System.out.println("匿名内部类实现Runable接口");
+      }
+    });
     thread.start();
   }
 

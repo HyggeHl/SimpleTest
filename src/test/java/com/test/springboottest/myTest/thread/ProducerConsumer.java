@@ -53,9 +53,9 @@ public class ProducerConsumer {
     }
 
     public synchronized void put() {
-      if (storage.size() == maxSize) {
+      //不能使用if
+      while (storage.size() == maxSize) {
         try {
-          System.out.println("storage.size() == maxSize");
           wait();
         } catch (InterruptedException e) {
           e.printStackTrace();
@@ -67,7 +67,8 @@ public class ProducerConsumer {
     }
 
     public synchronized void take() {
-      if (storage.size() == 0) {
+      //不能使用if
+      while (storage.size() == 0) {
         try {
           wait();
         } catch (InterruptedException e) {
@@ -84,7 +85,9 @@ public class ProducerConsumer {
     EventStorage storage = new EventStorage();
     Thread producerThread = new Thread(new Producer(storage));
     Thread consumerThread = new Thread(new Consumer(storage));
+    Thread consumerThread2 = new Thread(new Consumer(storage));
     producerThread.start();
     consumerThread.start();
+    consumerThread2.start();
   }
 }
