@@ -4,7 +4,6 @@ import com.test.springboottest.Entity.SysUser;
 import com.test.springboottest.utils.UserThreadLocal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

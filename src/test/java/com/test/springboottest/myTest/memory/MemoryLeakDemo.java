@@ -19,11 +19,4 @@ public class MemoryLeakDemo {
       objectList.add(new Object());
     }
   }
-
-  public static void main(String[] args) {
-    List<Object> objectList = new ArrayList<>();
-    while(true) {
-      objectList.add(new Object());
-    }
-  }
 }
