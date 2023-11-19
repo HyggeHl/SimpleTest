@@ -17,5 +17,7 @@ public class BaseTest {
 //    CountDownLatch
 //    Semaphore
 //    CyclicBarrier
+
+    System.out.println();
   }
 }
