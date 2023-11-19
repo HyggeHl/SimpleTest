@@ -2,6 +2,7 @@ package com.test.springboottest.myTest.thread;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -54,6 +55,9 @@ public class OrderByCountDownLatchTest {
 
     ReentrantLock lock = new ReentrantLock();
 
-    CyclicBarrier
+    Semaphore semaphore = new Semaphore(1);
+
+    CyclicBarrier cyclicBarrier = new CyclicBarrier(3);
+
   }
 }

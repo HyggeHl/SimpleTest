@@ -15,7 +15,7 @@ public class ThreadTest {
 //  private ThreadPoolTaskExecutor threadPoolTaskExecutor;
 
   @Test
-  void testThread() {
+  void testThread() throws InterruptedException {
     System.out.println("test");
     MyThreadPoolTaskExecutor myThreadPoolTaskExecutor = new MyThreadPoolTaskExecutor();
     ThreadPoolTaskExecutor threadPoolTaskExecutor = myThreadPoolTaskExecutor.getExecutor();
@@ -34,5 +34,18 @@ public class ThreadTest {
 
       });
     }
+
+
+
+    Thread thread = new Thread() {
+      @Override
+      public void run() {
+        System.out.println();
+      }
+    };
+    Thread.sleep(1000);
+
+    thread.notify();
+
   }
 }
