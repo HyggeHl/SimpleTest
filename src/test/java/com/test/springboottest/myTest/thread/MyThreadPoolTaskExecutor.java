@@ -2,7 +2,10 @@ package com.test.springboottest.myTest.thread;
 
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @program: springbootTest
@@ -15,6 +18,14 @@ public class MyThreadPoolTaskExecutor {
   private static final int MAX_COUR_SIZE = 4;
 
   ThreadPoolTaskExecutor getExecutor() {
+
+    // 线程工厂可通过 implements ThreadFactory接口自定义
+    // 任务拒绝策略可通过  implements RejectedExecutionHandler接口自定义
+    ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(2, 3, 0,
+            TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(3),
+            Executors.defaultThreadFactory(), new ThreadPoolExecutor.AbortPolicy());
+
+
     ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
 
     threadPoolTaskExecutor.setCorePoolSize(COUR_SIZE);// 设置核心线程数
